@@ -1,0 +1,7 @@
+#archivos y carpetas a incluir
+
+node_modules/
+uploads/
+buils/
+
+.env
