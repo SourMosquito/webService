@@ -4,7 +4,9 @@ const { Establishment } = require('../models');
 //Agregar establecimiento
 exports.add = async (request, response, next) => {
     try {
-        const establishment = await Establishment.create(request.body);
+
+        //asociar el establecimiento al usuario autenticado
+        const establishment = await Establishment.create({ ...request.body, UserId: request.user.id});
 
         response.json({
             mensaje: 'Se ha registrado el establecimiento.',
@@ -31,7 +33,7 @@ exports.add = async (request, response, next) => {
 //Listar establecimientos
 exports.list = async (req, res, next) => {
     try{
-        const establishments = await Establishment.findAll({});
+        const establishments = await Establishment.findAll({ where: {UserId: req.user.id } });
 
         res.json(establishments);
     } catch (error) {
@@ -42,7 +44,10 @@ exports.list = async (req, res, next) => {
 //Mostrar establecimiento
 exports.show = async (req, res, next) => {
     try{
-        const establishment = await Establishment.findByPk( req.params.id );
+        const establishment = await Establishment.findOne(
+        {
+            where: { id: req.params.id, UserId: req.user.id }
+        },);
 
         if (!establishment) {
             res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
@@ -57,7 +62,10 @@ exports.show = async (req, res, next) => {
 //Actualizar establecimiento
 exports.update = async (req, res, next) => {
     try {
-        const establishment = await Establishment.findByPk( req.params.id );
+        const establishment = await Establishment.findOne(
+            {
+                where: { id: req.params.id, UserId: req.user.id }
+            },);
 
         if (!establishment) {
             res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
@@ -90,7 +98,10 @@ exports.update = async (req, res, next) => {
 //Eliminar establecimiento
 exports.delete = async (req, res, next) => {
     try {
-        const establishment = await Establishment.findByPk( req.params.id );
+        const establishment = await Establishment.findOne(
+            {
+                where: { id: req.params.id, UserId: req.user.id }
+            },);
 
         if (!establishment) {
             res.status(404).json({ mensaje: 'No se encontro el establecimiento.' })
@@ -100,5 +111,16 @@ exports.delete = async (req, res, next) => {
         }
     }   catch (error) {
         res.status(503).json({ mensaje: 'Error al eliminar el establecimiento.' })
+    }
+};
+
+// Acciones para super administrador
+exports.listAll = async (req, res, next) => {
+    try{
+        const establishments = await Establishment.findAll({});
+
+        res.json(establishments);
+    } catch (error) {
+        response.status(503).json({ mensaje: 'Error al leer el establecimiento.'})
     }
 };

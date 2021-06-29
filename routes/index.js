@@ -12,6 +12,6 @@ module.exports = () => {
 
     //vincular router de cada archivo de rutas
     usersRoutes(router, accessControl);
-    establishmentRoutes(router);
+    establishmentRoutes(router, accessControl);
     return router;
 };
