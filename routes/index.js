@@ -7,6 +7,7 @@ const router = express.Router();
 const establishmentRoutes = require('./establishmentRoutes');
 const usersRoutes = require('./usersRoutes');
 const categoryRoutes = require('./categoryRoutes');
+const productRoutes = require('./productRoutes');
 
 module.exports = () => {
  
@@ -15,5 +16,6 @@ module.exports = () => {
     usersRoutes(router, accessControl);
     establishmentRoutes(router, accessControl);
     categoryRoutes(router, accessControl);
+    productRoutes(router, accessControl);
     return router;
 };
