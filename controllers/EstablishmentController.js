@@ -46,7 +46,7 @@ exports.show = async (req, res, next) => {
     try{
         const establishment = await Establishment.findOne(
         {
-            where: { id: req.params.id, UserId: req.user.id }
+            where: { id: req.params.id, UserId: req.user.id, }
         },);
 
         if (!establishment) {
@@ -122,5 +122,20 @@ exports.listAll = async (req, res, next) => {
         res.json(establishments);
     } catch (error) {
         response.status(503).json({ mensaje: 'Error al leer el establecimiento.'})
+    }
+};
+
+//Mostrar menus del establecimiento
+exports.show = async (req, res, next) => {
+    try{
+        const establishment = await Establishment.findByPk( req.params.id, { include: 'menus' },);
+
+        if (!establishment) {
+            res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
+        } else {
+            res.json(establishment);
+        }
+    } catch (error) {
+        res.status(503).json({ mensaje: 'Error al leer el establecimiento.'})
     }
 };

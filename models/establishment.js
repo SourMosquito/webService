@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       models.Establishment.belongsTo(models.User);
+      models.Establishment.hasMany(models.Menu, {
+        as: 'menus',
+      });
     }
   };
   Establishment.init({
