@@ -4,16 +4,16 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.addColumn('Establishments', 'UserId', {
+        queryInterface.addColumn('Categories', 'MenuId', {
           type: Sequelize.DataTypes.INTEGER,
           after: "id",
           references: {
-            model: "Users",
+            model: "Menus",
             key: "id",
           },
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
-        }, { transaction: t }),
+        }, { transaction: t })
       ]);
     });
   },
@@ -21,7 +21,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.removeColumn('Establishments', 'UserId', { transaction: t }),
+        queryInterface.removeColumn('Categories', 'MenuId', { transaction: t })
       ]);
     });
   }
