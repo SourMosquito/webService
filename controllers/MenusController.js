@@ -1,11 +1,11 @@
 const { request } = require('express');
 const { Menu } = require('../models');
 
-//Agregar producto
+//Agregar menú
 exports.add = async (request, response, next) => {
     try {
 
-        // asociar el producto a la categoría (se recibe como parámetro)
+        // asociar el menú al establecimiento (se recibe como parámetro)
         const datosMenu = { ...request.body };
         datosMenu.EstablismentId = request.params.establishment;
 
@@ -27,7 +27,7 @@ exports.add = async (request, response, next) => {
 
         response.status(503).json({
             error: true,
-            mensaje: 'Error al registrar el menu.',
+            mensaje: 'Error al registrar el menú.',
             errores,
         });
     }
@@ -42,7 +42,7 @@ exports.list = async (req, res, next) => {
 
         res.json(menus);
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el menu.'})
+        res.status(503).json({ mensaje: 'Error al leer el menú.'})
     }
 };
 
@@ -55,14 +55,14 @@ exports.update = async (req, res, next) => {
             });
 
         if (!menu) {
-            res.status(404).json({ mensaje: 'No se encontro el menu.'})
+            res.status(404).json({ mensaje: 'No se encontro el menú.'})
         } else {
             Object.keys(req.body).forEach((propiedad) => {
                 menu[propiedad] = req.body[propiedad];
             });
 
             await menu.save();
-            res.json({ mensaje: 'El menu fue actualizado.'});
+            res.json({ mensaje: 'El menú fue actualizado.'});
 
         }
     }   catch (error) {
@@ -76,7 +76,7 @@ exports.update = async (req, res, next) => {
 
         res.status(503).json({
             error: true,
-            mensaje: 'Error al actualizar el menu.',
+            mensaje: 'Error al actualizar el menú.',
             errores,
         });
     }
@@ -91,10 +91,10 @@ exports.delete = async (req, res, next) => {
             });
 
         if (!menu) {
-            res.status(404).json({ mensaje: 'No se encontro el menu.' })
+            res.status(404).json({ mensaje: 'No se encontro el menú.' })
         } else {
             await menu.destroy();
-            res.json({ mensaje: 'El menu fue eliminado.' });
+            res.json({ mensaje: 'El menú fue eliminado.' });
         }
     }   catch (error) {
         res.status(503).json({ mensaje: 'Error al eliminar el menu.' })
