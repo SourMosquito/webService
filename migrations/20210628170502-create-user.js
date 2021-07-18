@@ -26,7 +26,8 @@ module.exports = {
         defaultValue: 'user',
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       passwordResetToken: {
         type: Sequelize.STRING

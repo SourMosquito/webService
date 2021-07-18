@@ -27,7 +27,8 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
+        allowNull: false,
       },
       available: {
         type: Sequelize.BOOLEAN,

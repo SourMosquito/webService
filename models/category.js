@@ -17,8 +17,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Category.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "El campo no puede ser nulo."
+          },
+          len: {
+            args: [3, 255],
+            msg: "El nombre de la categoría tiene que ser entre 3 y 255 caracteres."
+          }
+      },
+    },
+    description:  {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "El campo no puede ser nulo."
+          },
+          len: {
+            args: [3, 255],
+            msg: "La descripción de la categoría tiene que ser entre 3 y 255 caracteres."
+          }
+      },
+    },
     active: DataTypes.BOOLEAN
   }, {
     sequelize,

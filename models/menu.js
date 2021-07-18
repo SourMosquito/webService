@@ -18,7 +18,20 @@ module.exports = (sequelize, DataTypes) => {
   };
   Menu.init({
     EstablishmentId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "El campo no puede ser nulo."
+        },
+        len: {
+          args: [3, 255],
+          msg: "El nombre del menú tiene que ser entre 3 y 255 caracteres."
+        }
+    },
+  },
+    
     active: DataTypes.BOOLEAN
   }, {
     sequelize,

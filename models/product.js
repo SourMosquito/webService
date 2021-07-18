@@ -15,9 +15,44 @@ module.exports = (sequelize, DataTypes) => {
   };
   Product.init({
     CategoryId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.DOUBLE,
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "El campo no puede ser nulo."
+          },
+          len: {
+            args: [3, 255],
+            msg: "El nombre del producto tiene que ser entre 3 y 255 caracteres."
+          }
+      },
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "El campo no puede ser nulo."
+          },
+          len: {
+            args: [3, 255],
+            msg: "La descripción del producto tiene que ser entre 3 y 255 caracteres."
+          }
+      },
+    },
+    price: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "El campo no puede ser nulo."
+        },
+        isDecimal: {
+          msg: "El precio del producto solo acepta valores númericos y decimales."
+        }
+    },
+  },
     available: DataTypes.BOOLEAN
   }, {
     sequelize,
