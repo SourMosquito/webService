@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Products', [
       {
-        CategoryId: 2,
+        CategoryId: 1,
         name: 'Spaguetti',
         description: 'Pasta con queso',
         price: 50.20,
@@ -13,7 +13,7 @@ module.exports = {
         updatedAt: new Date (),
       },
       {
-        CategoryId: 3,
+        CategoryId: 4,
         name: 'Agua de jamaica',
         description: 'Agua sabor jamaica',
         price: 10.20,
@@ -22,7 +22,7 @@ module.exports = {
         updatedAt: new Date (),
       },
       {
-        CategoryId: 2,
+        CategoryId: 1,
         name: 'Torta de jamon',
         description: 'Torta con jamon, quesillo, aguacate, frijoles y tomate',
         price: 25.00,
@@ -31,7 +31,7 @@ module.exports = {
         updatedAt: new Date (),
       },
       {
-        CategoryId: 3,
+        CategoryId: 4,
         name: 'Agua de horchata',
         description: 'Agua sabor horchata',
         price: 11.00,

@@ -47,7 +47,7 @@ exports.list = async (req, res, next) => {
 //Leer usuario
 exports.show = async(req, res, next) => {
     try{
-        const usuario = await User.findByPk(req.params.id);
+        const usuario = await User.findByPk(req.params.id, { include: 'orders'});
         usuario.password = null;
         if(!usuario){
             res.status(404).json({message: 'No se encontro el usuario'});
