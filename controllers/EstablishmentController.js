@@ -24,7 +24,7 @@ exports.add = async (request, response, next) => {
 
         response.status(503).json({
             error: true,
-            mensaje: 'Error al registrar el proyecto.',
+            mensaje: 'Error al registrar el establecimiento.',
             errores,
         });
     }
