@@ -7,7 +7,7 @@ exports.add = async (request, response, next) => {
 
         // asociar el menú al establecimiento (se recibe como parámetro)
         const datosMenu = { ...request.body };
-        datosMenu.EstablismentId = request.params.establishment;
+        datosMenu.EstablishmentId = request.params.establishment;
 
         const menu = await Menu.create(datosMenu);
 

@@ -12,6 +12,6 @@ module.exports = (router, accessControl) => {
 
     //acceso a establecimientos con super usuario
     router.get('/manage-establishments', accessControl('readAny', 'establishment'), establishmentController.listAll);
-
+    
     return router;
 };

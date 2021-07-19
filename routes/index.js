@@ -9,6 +9,7 @@ const usersRoutes = require('./usersRoutes');
 const menuRoutes = require('./menuRoutes');
 const categoryRoutes = require('./categoryRoutes');
 const productRoutes = require('./productRoutes');
+const orderRoutes = require('./orderRoutes');
 
 module.exports = () => {
  
@@ -19,5 +20,6 @@ module.exports = () => {
     categoryRoutes(router, accessControl);
     productRoutes(router, accessControl);
     menuRoutes(router, accessControl);
+    orderRoutes(router, accessControl);
     return router;
 };
