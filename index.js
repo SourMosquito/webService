@@ -3,10 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const bosyParser = require('body-parser');
 const cors = require('cors');
+const passport = require('passport');
 
+require('./middlewares/auth');
 const models = require('./models');
 const routes = require('./routes');
-
+const unprotectedRoutes = require('./routes/unprotectedRoutes');
+ 
 models.sequelize.authenticate()
  .then(() => console.log("BD conectada"))
   .catch((error) => console.log(error));
@@ -23,7 +26,8 @@ models.sequelize.authenticate()
   app.enable('trust proxy');
 
 // app routes 
-app.use('/', routes());
+app.use('/', unprotectedRoutes());
+app.use('/',  passport.authenticate('jwt', { session: false}), routes());
 
 //server port
 app.listen(app.get('port'), () => {
