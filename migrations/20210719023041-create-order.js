@@ -8,43 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       UserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
+        references:{
           model: 'Users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      ProductId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Products',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      price: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       total: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      finaliced: {
+      paymentMethod: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      finalized: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },

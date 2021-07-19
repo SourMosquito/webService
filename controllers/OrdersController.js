@@ -1,47 +1,31 @@
-const { request } = require('express');
+const { response } = require('express');
 const { Order } = require('../models');
 
-exports.add = async (req, res, next) => {
-  
+//Agregar pedido
+exports.add = async (request, response, next) => {
     try {
-      await Order.create(req.body);
 
-      res.json({ mensaje: 'Nuevo pedido agregado' });
-    } catch (error) {
-      console.error(error);
-      res.json({mensaje: 'Error al agregar el pedido'});
-      next();
-    }
-  };
+        //asociar el pedido al usuario autenticado
+        const order = await Order.create({ ...request.body, UserId: request.user.id});
 
-
-  exports.list = async (req, res, next) => {
-    try{
-        const order = await Order.findAll({
-            where: { UserId: req.params.user },
+        response.json({
+            mensaje: 'Se ha registrado el pedido.',
+            order,
         });
-
-        res.json(products);
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el pedido.'})
-    }
-};
-
-
-exports.delete = async (req, res, next) => {
-    try {
-        const order = await Order.findOne(
-            {
-                where: { UserId: req.params.user, id: req.params.id },
-            });
-
-        if (!product) {
-            res.status(404).json({ mensaje: 'No se encontro el pedido.' })
-        } else {
-            await product.destroy();
-            res.json({ mensaje: 'El pedido fue eliminado.' });
+        
+        let errores = [];
+        if (error.errors) {
+            errores = error.errors.map( errorItem => ({
+                campo: errorItem.path,
+                error: errorItem.message,
+            }));
         }
-    }   catch (error) {
-        res.status(503).json({ mensaje: 'Error al eliminar el pedido.' })
+
+        response.status(503).json({
+            error: true,
+            mensaje: 'Error al registrar el pedido.',
+            errores,
+        });
     }
 };

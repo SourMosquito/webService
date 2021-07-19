@@ -1,8 +1,10 @@
 const orderController = require('../controllers/OrdersController');
 
 module.exports = (router, accessControl) => {
-    router.post('/orders', accessControl('createOwn', 'orders'), orderController.add);
-    router.delete('/orders/:id', accessControl('readOwn', 'orders'), orderController.delete);
+    //rutas del recurso order
+
+    //Pedidos del usuario autenticado
+    router.post('/order', accessControl('createOwn', 'order'), orderController.add);
 
     return router;
 };
