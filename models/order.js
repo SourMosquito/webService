@@ -18,8 +18,40 @@ module.exports = (sequelize, DataTypes) => {
   };
   Order.init({
     UserId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    total: DataTypes.DOUBLE,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "El campo no puede ser nulo."
+        },
+        len: {
+          args: [3, 255],
+          msg: "El nombre del pedido tiene que ser entre 4 y 200 caracteres."
+        }
+    },
+  },
+    total: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "El campo no puede ser nulo."
+        },
+        isDecimal: {
+          msg: "El total solo acepta valores númericos y decimales."
+        }
+    },
+  },
+  paymentMethod: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: "El campo no puede ser nulo."
+      },
+  },
+},
     paymentMethod: DataTypes.STRING,
     finalized: DataTypes.BOOLEAN,
   }, {
