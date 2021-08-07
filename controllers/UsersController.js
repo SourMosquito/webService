@@ -17,7 +17,7 @@ exports.add = async (request, response, next) => {
 
         user.password = null; //para evitar enviarlo en la respuesta
 
-        response.json({ message: 'usuario registrado', user});
+        response.json({ message: 'usuario registrado', user })
     } catch (error) {
         console.log(error);
 
