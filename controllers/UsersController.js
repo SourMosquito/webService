@@ -13,11 +13,11 @@ exports.add = async (request, response, next) => {
         const salt = await bcrypt.genSalt(10);
         datosUsuario.password = await bcrypt.hash(datosUsuario.password, salt);
         //Registrar Usuario
-        const usuario = await User.create(datosUsuario);
+        const user = await User.create(datosUsuario);
 
-        usuario.password = null; //para evitar enviarlo en la respuesta
+        user.password = null; //para evitar enviarlo en la respuesta
 
-        response.json({ message: 'usuario registrado', usuario});
+        response.json({ message: 'usuario registrado', user })
     } catch (error) {
         console.log(error);
 
@@ -28,7 +28,7 @@ exports.add = async (request, response, next) => {
                 error: errorItem.message,
             }));
         }
-        response.json({ error: true, mensaje: 'Error al registar al usuario', errores});
+        response.status(400).json({ error: true, message: 'Error al registar al usuario', errores});
     };
 };
 
