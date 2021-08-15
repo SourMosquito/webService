@@ -45,7 +45,7 @@ describe("Registro y autenticación de usuarios", () => {
             });
         });
     });
-
+    /*
     describe("Autenticar usuario", () => {
         it("Debe autenticar un usuario", (done) => {
                 chai.request(url)
@@ -76,4 +76,5 @@ describe("Registro y autenticación de usuarios", () => {
             });
     
     });
+    */
 });

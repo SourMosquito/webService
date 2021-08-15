@@ -50,9 +50,12 @@ module.exports = (sequelize, DataTypes) => {
       notNull: {
         msg: "El campo no puede ser nulo."
       },
+      len: {
+        args: [3, 255],
+        msg: "El nombre del pedido tiene que ser entre 4 y 200 caracteres."
+      }
   },
 },
-    paymentMethod: DataTypes.STRING,
     finalized: DataTypes.BOOLEAN,
   }, {
     sequelize,
