@@ -23,7 +23,7 @@ module.exports = {
         if(isNaN(num1) || isNaN(num2)) {
             throw new Error("Valores inválidos");
         }
-        if(num2 == 0) {
+        if(num2 === 0){
             throw new Error("División por cero");
         }
         return num1 / num2;
@@ -31,13 +31,13 @@ module.exports = {
     sumArray: (values) => {
         var suma = 0;
         for (var i = 0; i < values.length; i++){
-            if ( isNaN(values[i]) ) {
+            if ( isNaN(values[i]) ){
                 throw new Error ("Valores inválidos");
-            } 
-            else {
+            } else {
                 suma = suma + values[i];
             }
         }
         return suma;
     }
 };
+

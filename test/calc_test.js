@@ -33,7 +33,7 @@ describe("Calculadora", () => {
         });
     });
 
-    describe("Escenarios de Restar", () => {
+    describe("Función restar", () => {
         it("Debe retornar 2 cuando: 5 - 3", () => {
             assert.equal(calc.sustraction(5, 3), 2);
         });
@@ -86,18 +86,17 @@ describe("Calculadora", () => {
             assert.equal(calc.division(0, 50), 0);
         });
 
-        it("Debe retornar Error cuando: 50 / 0", () => {
+        it("Debe retornar Error cuando: '50' / 0", () => {
             assert.throws(
                 function(){
                     calc.division(50, 0);
                 },
                 {
-                    name: 'Error',
-                    message: 'División por cero'
+                    name: "Error",
+                    message: "División por cero"
                 }
-            )
-        })
-
+            );
+        });
         it("Debe retornar Error cuando: 'efg' / 0", () => {
             assert.throws(
                 function(){

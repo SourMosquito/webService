@@ -8,7 +8,7 @@ const url = 'http://localhost:5000';
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InRhbmlhLm1hcnRpbmV6QGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlciJ9LCJpYXQiOjE2Mjg5ODU3NjMsImV4cCI6MTYyOTE1ODU2M30.SX7tYSA_BVlP19W0nfYAeLAiQn6NL-YgY6K2KQF6VdE';
 
 describe('Test de Orders', () => {
-    /* 
+    
     describe('Agregar orden', () => {
        
         it('Debe crear un nueva pedido', (done) => {
@@ -148,7 +148,7 @@ describe('Test de Orders', () => {
             });
         });
     }); 
-*/
+
     describe('Eliminar pedido', () => {
         let idOrden = 17;
         /*

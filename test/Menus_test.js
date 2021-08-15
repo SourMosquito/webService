@@ -220,7 +220,7 @@ describe('Test de menus', () => {
     });
 
     describe('Eliminar menú', () => {
-/*
+
         it('Debe eliminar un menú especifico existente en el establecimiento especificado', (done) => {
     
             chai.request(url)
@@ -240,7 +240,7 @@ describe('Test de menus', () => {
 
             });
         });
-*/
+
         it('No debe de eliminar un menú especifico no existente en el establecimiento especificado', (done) => {
     
             chai.request(url)

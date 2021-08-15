@@ -100,3 +100,4 @@ exports.delete = async (req, res, next) => {
         res.status(503).json({ mensaje: 'Error al eliminar el menu.' })
     }
 };
+
