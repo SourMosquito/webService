@@ -8,7 +8,7 @@ const url = 'http://localhost:5000';
 describe("Registro y autenticación de usuarios", () => {
 
     describe("Registro de usuario", () =>{
-        /*
+        
         it("Debe registrar nuevo usuario", (done) =>{
             chai.request(url)
             .post('/users')
@@ -26,7 +26,7 @@ describe("Registro y autenticación de usuarios", () => {
                 done();
             });
         });
-        */
+        
        
         it("Debe rechazar el registro de usuario existente", (done) => {
             chai.request(url)
@@ -46,7 +46,7 @@ describe("Registro y autenticación de usuarios", () => {
             });
         });
     });
-
+    
     describe("Autenticar usuario", () => {
         it("Debe autenticar un usuario", (done) => {
                 chai.request(url)
@@ -77,4 +77,5 @@ describe("Registro y autenticación de usuarios", () => {
             });
     
     });
+    
 });

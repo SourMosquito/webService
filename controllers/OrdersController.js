@@ -38,7 +38,7 @@ exports.list = async (req, res, next) => {
 
         res.json(orders);
     } catch (error) {
-        response.status(503).json({ mensaje: 'Error al leer el pedido.'})
+        response.status(503).json({ error: true, message: 'Error al leer el pedido.'})
     }
 };
 
@@ -51,12 +51,12 @@ exports.show = async (req, res, next) => {
         },);
 
         if (!order) {
-            res.status(404).json({ mensaje: 'No se encontro el pedido.'})
+            res.status(404).json({ error: true, message: 'No se encontro el pedido.'})
         } else {
             res.json(order);
         }
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el pedido.'})
+        res.status(503).json({ error: true, message: 'Error al leer el pedido.'})
     }
 };
 
@@ -122,12 +122,12 @@ exports.show = async (req, res, next) => {
         const order = await Order.findByPk( req.params.id, { include: 'products' },);
 
         if (!order) {
-            res.status(404).json({ mensaje: 'No se encontro el pedido.'})
+            res.status(404).json({ error: true, message: 'No se encontro el pedido.'})
         } else {
             res.json(order);
         }
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el pedido.'})
+        res.status(503).json({ error: true, message: 'Error al leer el pedido.'})
     }
 };
 

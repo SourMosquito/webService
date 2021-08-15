@@ -27,7 +27,7 @@ exports.add = async (request, response, next) => {
 
         response.status(503).json({
             error: true,
-            mensaje: 'Error al registrar el menú.',
+            message: 'Error al registrar el menú.',
             errores,
         });
     }
@@ -91,7 +91,7 @@ exports.delete = async (req, res, next) => {
             });
 
         if (!menu) {
-            res.status(404).json({ mensaje: 'No se encontro el menú.' })
+            res.status(404).json({ error:true, message: 'No se encontro el menú.' })
         } else {
             await menu.destroy();
             res.json({ mensaje: 'El menú fue eliminado.' });

@@ -42,7 +42,7 @@ exports.list = async (req, res, next) => {
 
         res.json(categories);
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer las categorías.'})
+        res.status(503).json({ error: true, message: 'Error al leer las categorías.'})
     }
 };
 
