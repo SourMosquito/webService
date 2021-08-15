@@ -27,6 +27,7 @@ describe("Registro y autenticación de usuarios", () => {
             });
         });
         */
+       
         it("Debe rechazar el registro de usuario existente", (done) => {
             chai.request(url)
             .post('/users')
@@ -51,7 +52,7 @@ describe("Registro y autenticación de usuarios", () => {
                 chai.request(url)
                 .post('/login')
                 .send({
-                  email: "laura66@gmail.com",
+                  email: "tania.martinez@gmail.com",
                   password: "1234",
                 })
                 .end(function(err, res) {
@@ -65,7 +66,7 @@ describe("Registro y autenticación de usuarios", () => {
                     chai.request(url)
                     .post('/login')
                     .send({
-                      email: "laura66@gmail.com",
+                      email: "tania.martinez@gmail.com",
                       password: "1234f",
                     })
                     .end(function(err, res) {

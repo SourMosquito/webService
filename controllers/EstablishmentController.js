@@ -24,7 +24,7 @@ exports.add = async (request, response, next) => {
 
         response.status(503).json({
             error: true,
-            mensaje: 'Error al registrar el establecimiento.',
+            message: 'Error al registrar el establecimiento.',
             errores,
         });
     }
@@ -50,12 +50,12 @@ exports.show = async (req, res, next) => {
         },);
 
         if (!establishment) {
-            res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
+            res.status(404).json({ error: true, message: 'No se encontró el establecimiento.'})
         } else {
             res.json(establishment);
         }
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el establecimiento.'})
+        res.status(503).json({  error: true, message: 'Error al leer el establecimiento.'})
     }
 };
 
@@ -68,14 +68,14 @@ exports.update = async (req, res, next) => {
             },);
 
         if (!establishment) {
-            res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
+            res.status(404).json({ error: true, message: 'No se encontró el establecimiento.'})
         } else {
             Object.keys(req.body).forEach((propiedad) => {
                 establishment[propiedad] = req.body[propiedad];
             });
 
             await establishment.save();
-            res.json({ mensaje: 'El establecimiento fue actualizado.'});
+            res.json({ message: 'El establecimiento fue actualizado.'});
 
         }
     }   catch (error) {
@@ -89,7 +89,7 @@ exports.update = async (req, res, next) => {
 
         res.status(503).json({
             error: true,
-            mensaje: 'Error al actualizar el establecimiento.',
+            message: 'Error al actualizar el establecimiento.',
             errores,
         });
     }
@@ -104,13 +104,13 @@ exports.delete = async (req, res, next) => {
             },);
 
         if (!establishment) {
-            res.status(404).json({ mensaje: 'No se encontro el establecimiento.' })
+            res.status(404).json({ error: true, message: 'No se encontró el establecimiento.' })
         } else {
             await establishment.destroy();
-            res.json({ mensaje: 'El establecimiento fue eliminado.' });
+            res.status(200).json({ error: true, message: 'El establecimiento fue eliminado.' });
         }
     }   catch (error) {
-        res.status(503).json({ mensaje: 'Error al eliminar el establecimiento.' })
+        res.status(503).json({ error: true, message: 'Error al eliminar el establecimiento.' })
     }
 };
 
@@ -131,11 +131,11 @@ exports.show = async (req, res, next) => {
         const establishment = await Establishment.findByPk( req.params.id, { include: 'menus' },);
 
         if (!establishment) {
-            res.status(404).json({ mensaje: 'No se encontro el establecimiento.'})
+            res.status(404).json({ error: true, message: 'No se encontró el establecimiento.'})
         } else {
             res.json(establishment);
         }
     } catch (error) {
-        res.status(503).json({ mensaje: 'Error al leer el establecimiento.'})
+        res.status(503).json({ error: true, message: 'Error al leer el establecimiento.'})
     }
 };

@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          isAlpha:{
+            msg: "Sólo pueden ser letras."
+          },
           notNull: {
             msg: "El campo no puede ser nulo."
           },

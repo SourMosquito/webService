@@ -11,7 +11,9 @@ exports.roles = () => {
 
     ac.grant('user')
     .readOwn(['profile', 'establishment', 'menu', 'category', 'product', 'order'])
+    .updateAny(['profile', 'establishment', 'menu', 'category', 'product', 'order'])
     .createOwn(['profile', 'establishment','menu', 'category', 'product', 'order']);
+
 
     ac.grant('super')
     .extend('user')//heredar rol

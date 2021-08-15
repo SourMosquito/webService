@@ -27,13 +27,16 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [3, 255],
             msg: "El nombre de la categoría tiene que ser entre 3 y 255 caracteres."
-          }
+          },
       },
     },
     description:  {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          isAlpha:{
+            msg: "Este campo solo pueden ser letras"
+          },
           notNull: {
             msg: "El campo no puede ser nulo."
           },
