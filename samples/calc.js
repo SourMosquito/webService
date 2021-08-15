@@ -23,12 +23,21 @@ module.exports = {
         if(isNaN(num1) || isNaN(num2)) {
             throw new Error("Valores inválidos");
         }
+        if(num2 === 0){
+            throw new Error("División por cero");
+        }
         return num1 / num2;
     },
-    sumArray: (num1, num2, num3, num4, num5, num6) => {
-        if(isNaN(num1) || isNaN(num2) || isNaN(num3) || isNaN(num4) || isNaN(num5) || isNaN(num6)) {
-            throw new Error("Valores inválidos");
+    sumArray: (values) => {
+        var suma = 0;
+        for (var i = 0; i < values.length; i++){
+            if ( isNaN(values[i]) ){
+                throw new Error ("Valores inválidos");
+            } else {
+                suma = suma + values[i];
+            }
         }
-        return num1 + num2 + num3 + num4 + num5 + num6
+        return suma;
     }
 };
+

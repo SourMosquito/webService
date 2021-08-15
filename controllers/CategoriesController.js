@@ -91,13 +91,27 @@ exports.delete = async (req, res, next) => {
             });
 
         if (!category) {
-            res.status(404).json({ mensaje: 'No se encontro la categoría.' })
+            res.status(404).json({ error: true, message: 'No se encontro la categoría.' })
         } else {
             await category.destroy();
-            res.json({ mensaje: 'La categoría fue eliminada.' });
+            res.json({ error: true, message: 'La categoría fue eliminada.' });
         }
     }   catch (error) {
-        res.status(503).json({ mensaje: 'Error al eliminar la categoría.' })
+        res.status(503).json({ error: true, message: 'Error al eliminar la categoría.' })
     }
 };
     
+
+exports.show = async (req, res, next) => {
+    try{
+        const category = await Category.findByPk( req.params.id, { include: 'menus' },);
+
+        if (!category) {
+            res.status(404).json({ error: true, message: 'No se encontró la categoria.'})
+        } else {
+            res.json(category);
+        }
+    } catch (error) {
+        res.status(503).json({ error: true, message: 'Error al leer la categoria.'})
+    }
+};
