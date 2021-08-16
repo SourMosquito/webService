@@ -189,7 +189,7 @@ describe('Test de categorías', () => {
     
     describe("Eliminar categoría", () => {
         let idMenu = 1;
-        let idCategoria = 108;
+        let idCategoria = 146;
 
         it("Debe rechazar eliminar las categorías si sus credenciales son inválidas", (done) => {
             chai.request(url)

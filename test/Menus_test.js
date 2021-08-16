@@ -231,7 +231,7 @@ describe('Test de menus', () => {
                 idEstablecimiento = res.body[res.body.length - 1].id;
     
                 chai.request(url)
-                .delete(`/establishment/${3}/menu/${9}`)
+                .delete(`/establishment/${3}/menu/${59}`)
                 .set({ 'Authorization':`jwt ${token}` })
                 .end((err, res) => {
                     expect(res).to.have.status(200);

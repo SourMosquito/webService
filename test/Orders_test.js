@@ -150,7 +150,7 @@ describe('Test de Orders', () => {
     }); 
 
     describe('Eliminar pedido', () => {
-        let idOrden = 7;
+        let idOrden = 27;
         
         it('Debe eliminar el pedido que se espefico de un usuario', (done) => {
             chai.request(url)

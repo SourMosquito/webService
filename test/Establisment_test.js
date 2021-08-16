@@ -181,7 +181,7 @@ describe('Test de establisment', () => {
     });
 
     describe("Eliminar establecimiento", () => {
-        let idEstablisment = 9;
+        let idEstablisment = 19;
 
         it('No debe eliminar establecimiento si el token del usuario es invalido', (done) => {
             chai.request(url)

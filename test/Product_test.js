@@ -207,7 +207,7 @@ describe("Test de productos", () => {
     
     describe("Eliminar producto", () =>{
         let idCategory = 8;
-        let idProduct = 21;
+        let idProduct = 29;
 
         it("Debe rechazar eliminar un producto si sus credenciales son inválidas", (done) => {
             chai.request(url)
