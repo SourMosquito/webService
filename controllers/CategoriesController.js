@@ -76,7 +76,7 @@ exports.update = async (req, res, next) => {
 
         res.status(503).json({
             error: true,
-            mensaje: 'Error al actualizar la categoría.',
+            message: 'Error al actualizar la categoría.',
             errores,
         });
     }

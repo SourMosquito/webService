@@ -31,7 +31,7 @@ describe("Test de productos", () => {
 
         });
 
-        it('No debe dejar crear un producto si un dato se envia un campo', (done) => {
+        it('No debe dejar crear un producto si hace falta un campo o se envia vacio', (done) => {
                 
             let idCategory = 8;
 
@@ -40,7 +40,7 @@ describe("Test de productos", () => {
                 .set({ 'Authorization': `jwt ${token}` })
                 .send({
                     //name: false,
-                     description: "Ejemplo de producto",
+                    description: "Ejemplo de producto",
                     price: 44,
                     available: true
                 })
@@ -112,7 +112,7 @@ describe("Test de productos", () => {
             });
         });
 
-        it('No debe devolver los productos de una categoría de un usuario invalido', (done) => {
+        it('No debe devolver los productos de una categoría de un usuario inválido', (done) => {
 
             chai.request(url)
             .get('/category')
@@ -207,7 +207,7 @@ describe("Test de productos", () => {
     
     describe("Eliminar producto", () =>{
         let idCategory = 8;
-        let idProduct = 10;
+        let idProduct = 21;
 
         it("Debe rechazar eliminar un producto si sus credenciales son inválidas", (done) => {
             chai.request(url)
@@ -222,9 +222,9 @@ describe("Test de productos", () => {
         it("Debe rechazar eliminar un producto si la ruta es incorrecta", (done) => {
             chai.request(url)
             .delete(`/category/${idCategory}/productd/${idProduct}`) 
-            .set({ 'Authorization': `jwt ${token}x` })
+            .set({ 'Authorization': `jwt ${token}` })
             .end((err, res) => {
-                    expect(res).to.have.status(401); 
+                    expect(res).to.have.status(404); 
                     done();
             });
         }); 

@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InRhbmlhLm1hcnRpbmV6QGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlciJ9LCJpYXQiOjE2MjkwMDA1NjgsImV4cCI6MTYyOTE3MzM2OH0.ZNYHdt7p_JMYVJAgDwBP4S8TPGyN8oOyFOqqB0OGapM";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InRhbmlhLm1hcnRpbmV6QGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlciJ9LCJpYXQiOjE2MjkwNjY5MjYsImV4cCI6MTYyOTIzOTcyNn0.dARkAVguFSJv45xeDhVhc51GQrH22WFC3dGC3ZFkB28";
 
 describe('Test de categorías', () => {
     
@@ -18,7 +18,7 @@ describe('Test de categorías', () => {
             .set({ 'Authorization': `jwt ${token}`})
             .end((err, res) => {
 
-                let idMenu = 4;
+                let idMenu = 1;
                 //idMenu = res.body[res.body.length - 1].idMenu;
 
                 chai.request(url)
@@ -99,10 +99,10 @@ describe('Test de categorías', () => {
 
     describe("Leer categorías", () => {
         let IdCategoria = 0;
-        let idMenu = 4;
+        let idMenu = 2;
         it("Debe devolver las categorías", (done) => {
             chai.request(url)
-            .get('/menu/${idMenu}/category') 
+            .get(`/menu/${idMenu}/category`) 
             .set({ 'Authorization': `jwt ${token}` })
             .end((err, res) => {
                 if(res.body.length > 0) {
@@ -125,7 +125,7 @@ describe('Test de categorías', () => {
 
         it("Debe rechazar leer las categorías si sus credenciales son inválidas", (done) => {
             chai.request(url)
-            .get('/menu/${idMenu}/category') 
+            .get(`/menu/${idMenu}/category`) 
             .set({ 'Authorization': `jwt ${token}x` })
             .end((err, res) => {
                     expect(res).to.have.status(401); 
@@ -135,12 +135,12 @@ describe('Test de categorías', () => {
     });
      
     describe('Actualizar categorías', () => {
-        let idMenu = 4;
-        let IdCategoria = 6;
+        let idMenu = 1;
+        let idCategoria = 103;
         
         it("Debe actualizar una categoría", (done) => {
             chai.request(url)
-            .put(`/menu/${idMenu}/category/${IdCategoria}`) 
+            .put(`/menu/${idMenu}/category/${idCategoria}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                     name: "Categoria de prueba actualizada",
@@ -148,18 +148,17 @@ describe('Test de categorías', () => {
                     active: true
             })
             .end((err, res) => {
-                console.log(res.body);
                 expect(res).to.have.status(200);
                 done();
             });
         });
         
-        it('Debe rechazar actualizar una categoría sin un campo', (done) => {
+        it('Debe rechazar actualizar una categoría si un campo esta vacio', (done) => {
             chai.request(url)
-            .put(`/menu/${idMenu}/category/${IdCategoria}`) 
+            .put(`/menu/${idMenu}/category/${idCategoria}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                    //name: "Categoria de prueba actualizada",
+                    name: "",
                     description: "Encuentre las mejores comidas",
                     active: true
             })
@@ -172,7 +171,7 @@ describe('Test de categorías', () => {
 
         it('Debe rechazar actualizar una categoría si no corresponde al id', (done) => {
             chai.request(url)
-            .put(`/menu/${idMenu}/category/${IdCategoria + 66}`) 
+            .put(`/menu/${idMenu}/category/${idCategoria * 200}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                     name: "Categoria de prueba actualizada",
@@ -189,12 +188,12 @@ describe('Test de categorías', () => {
     });
     
     describe("Eliminar categoría", () => {
-        let idMenu = 4;
-        let IdCategoria = 9;
+        let idMenu = 1;
+        let idCategoria = 108;
 
         it("Debe rechazar eliminar las categorías si sus credenciales son inválidas", (done) => {
             chai.request(url)
-            .delete(`/menu/${idMenu}/category/${IdCategoria}`) 
+            .delete(`/menu/${idMenu}/category/${idCategoria}`) 
             .set({ 'Authorization': `jwt ${token}x` })
             .end((err, res) => {
                     expect(res).to.have.status(401); 
@@ -204,7 +203,7 @@ describe('Test de categorías', () => {
         
         it('Debe eliminar una categoría', (done) => {
             chai.request(url)
-            .delete(`/menu/${idMenu}/category/${IdCategoria}`) 
+            .delete(`/menu/${idMenu}/category/${idCategoria}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -215,7 +214,7 @@ describe('Test de categorías', () => {
 
         it('No debe eliminar una categoría si no existe', (done) => {
             chai.request(url)
-            .delete(`/menu/${idMenu}/category/${IdCategoria}`) 
+            .delete(`/menu/${idMenu}/category/${idCategoria}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .end((err, res) => {
                 expect(res).to.have.status(404);

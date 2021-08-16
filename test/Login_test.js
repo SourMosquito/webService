@@ -13,9 +13,9 @@ describe("Registro y autenticación de usuarios", () => {
             chai.request(url)
             .post('/users')
             .send({
-                name: "Laura",
-                lastname: "Escobar",
-                email: "laura66@gmail.com",
+                name: "Wanda",
+                lastname: "Fernandez",
+                email: "FerWA@gmail.com",
                 password: "1234",
             })
             .end(function(err, res) {
