@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InRhbmlhLm1hcnRpbmV6QGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlciJ9LCJpYXQiOjE2Mjg2NTk0MjcsImV4cCI6MTYyODgzMjIyN30.VLBJa2fLPE_LsAv-MF4Tx7G75qb7Vx8Hp5tzVcResSY';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InRhbmlhLm1hcnRpbmV6QGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlciJ9LCJpYXQiOjE2MjkwNjY5MjYsImV4cCI6MTYyOTIzOTcyNn0.dARkAVguFSJv45xeDhVhc51GQrH22WFC3dGC3ZFkB28';
 
 
 describe('Test de establisment', () => {
@@ -70,7 +70,7 @@ describe('Test de establisment', () => {
 
     });
     describe("Leer establecimientos", () => {
-        let idEstablisment = 0;
+        let idEstablisment = 9;
         it("Debe devolver los establecimientos", (done) => {
             chai.request(url)
             .get('/establishment') 
@@ -84,7 +84,6 @@ describe('Test de establisment', () => {
             });
         });
     
-
         it("Debe devolver establecimiento de un usuario", (done) => {
             chai.request(url)
             .get(`/establishment/${idEstablisment}`) 
@@ -96,8 +95,6 @@ describe('Test de establisment', () => {
             });
         });
     
-    
-
         it("No debe devolver datos de establecimiento que no son de un usuario", (done) => {
             chai.request(url)
             .get(`/establishment/${idEstablisment * 50}`) 
@@ -110,8 +107,9 @@ describe('Test de establisment', () => {
             });
         });
     });
+
     describe("Actualizar establecimiento", () => {
-        let idEstablisment = 2;
+        let idEstablisment = 8;
         it("Debe actualizar un establecimiento", (done) => {
             chai.request(url)
             .put(`/establishment/${idEstablisment}`) 
@@ -124,7 +122,6 @@ describe('Test de establisment', () => {
                 available: true,
             })
             .end((err, res) => {
-                console.log(res.body);
                 expect(res).to.have.status(200);
                 done();
             });
@@ -151,7 +148,7 @@ describe('Test de establisment', () => {
 
         it("Debe rechazar actualizar un establecimiento si no corresponde al id", (done) => {
             chai.request(url)
-            .put(`/establishment/${idEstablisment + 3}`) 
+            .put(`/establishment/${idEstablisment * 200}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                 name: 'Nuevo establecimiento actualizado g',
@@ -184,14 +181,14 @@ describe('Test de establisment', () => {
     });
 
     describe("Eliminar establecimiento", () => {
-        let idEstablisment = 5;
+        let idEstablisment = 19;
 
-        it('No debe eliminar establecimiento si no tiene permisos', (done) => {
+        it('No debe eliminar establecimiento si el token del usuario es invalido', (done) => {
             chai.request(url)
             .delete(`/establishment/${idEstablisment}`) 
-            .set({ 'Authorization': `jwt ${token}` })
+            .set({ 'Authorization': `jwt ${token}A` })
             .end((err, res) => {
-                expect(res).to.have.status(403);
+                expect(res).to.have.status(401);
                 done();
             })
         });
@@ -209,7 +206,7 @@ describe('Test de establisment', () => {
        
         it('No debe eliminar establecimiento si no existe', (done) => {
             chai.request(url)
-            .delete(`/establishment/${idEstablisment}`) 
+            .delete(`/establishment/${idEstablisment * 200}`) 
             .set({ 'Authorization': `jwt ${token}` })
             .end((err, res) => {
                 expect(res).to.have.status(404);

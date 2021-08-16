@@ -101,7 +101,7 @@ describe('Test de Orders', () => {
     });
 
     describe('Actualizar pedido', () => {
-        let idOrden = 20;
+        let idOrden = 10;
     
         it('Debe actualizar los datos del pedidos de un usuario', (done) => {
             chai.request(url)
@@ -150,8 +150,8 @@ describe('Test de Orders', () => {
     }); 
 
     describe('Eliminar pedido', () => {
-        let idOrden = 17;
-        /*
+        let idOrden = 27;
+        
         it('Debe eliminar el pedido que se espefico de un usuario', (done) => {
             chai.request(url)
             .delete(`/order/${idOrden}`)
@@ -161,7 +161,7 @@ describe('Test de Orders', () => {
                 done();
             });
         });
-        */
+        
         it('No debe eliminar el pedido que se espefico de un usuario invalido', (done) => {
             chai.request(url)
             .delete(`/order/${idOrden}`)
